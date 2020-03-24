@@ -1,0 +1,33 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: linear-gradient(135deg, #0ff0b3 0%, #036ed9 100%);
+  color: white;
+  font-family: Lato, sans-serif;
+}
+
+.container {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  justify-content: center;
+}
+
+h1 {
+  font-size: 5rem;
+  margin: 0;
+  margin-bottom: 1rem;
+  letter-spacing: 1rem;
+  text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.2);
+}
+
+p {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.2);
+}
