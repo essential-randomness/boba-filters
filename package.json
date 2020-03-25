@@ -31,6 +31,7 @@
     "webpack-dev-server": "^3.10.3"
   },
   "dependencies": {
+    "@types/webpack-env": "^1.15.1",
     "face-api.js": "^0.22.2",
     "regenerator-runtime": "^0.13.5"
   }
