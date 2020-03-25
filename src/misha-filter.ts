@@ -28,8 +28,6 @@ const getCachedImage = (src: string): Promise<HTMLImageElement> => {
   });
 };
 
-const MARGINS = 10;
-
 export default async (
   target: HTMLCanvasElement,
   faceBox: Box
@@ -37,13 +35,17 @@ export default async (
   const misha = await getCachedImage(getRandomMisha());
   logger(`Chosen image: ${misha.src}`);
 
+  // Add some margin so the face is slightly bigger than the target.
+  // The margin will depend on the box size. Let's say 1/5.
+  const marginX = faceBox.width / 5;
+  const marginY = faceBox.height / 5;
   const context = target.getContext("2d");
   context?.drawImage(
     misha,
-    faceBox.x - MARGINS,
-    faceBox.y - MARGINS,
-    faceBox.width + 2 * MARGINS,
-    faceBox.height + 2 * MARGINS
+    faceBox.x - marginX,
+    faceBox.y - marginY,
+    faceBox.width + 2 * marginX,
+    faceBox.height + 2 * marginY
   );
 
   return target;
