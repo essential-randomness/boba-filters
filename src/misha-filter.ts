@@ -1,7 +1,6 @@
-/*import misha1 from "./mishaPics/misha1.png";
-import misha2 from "./mishaPics/misha2.png";
-import misha4 from "./mishaPics/misha4.png";*/
 import { Box } from "face-api.js";
+
+const logger = require("debug")("BobaFilters");
 
 function importAll(r: __WebpackModuleApi.RequireContext) {
   return r.keys().map(moduleName => r(moduleName).default);
@@ -23,6 +22,7 @@ export default (faceBox: Box) => {
   faceDiv.style.overflow = "visible";
   const img = document.createElement("img");
   img.src = "/" + getRandomMisha();
+  logger("Chosen image: ", img.src);
   img.width = faceBox.width + 20;
   faceDiv.appendChild(img);
 

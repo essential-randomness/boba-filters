@@ -1,6 +1,9 @@
 import { findFace } from "./face-recognition";
 import mishaFilter from "./misha-filter";
 
+const logger = require("debug")("BobaFilters");
+logger.enabled = true;
+
 type ImageLike =
   | string
   | HTMLCanvasElement
@@ -13,7 +16,7 @@ const applyFilter = (
 ) => {
   return new Promise((resolve, reject) => {
     findFace(target).then(result => {
-      console.log("here is", result);
+      logger("here is", result);
       const container = document.querySelector(".imgContainer") as HTMLElement;
 
       result.forEach(faceBox => {
