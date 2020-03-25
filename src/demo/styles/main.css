@@ -16,6 +16,9 @@ body {
   height: 100vh;
   justify-content: center;
 }
+.imgContainer {
+  position: relative;
+}
 
 h1 {
   font-size: 5rem;
