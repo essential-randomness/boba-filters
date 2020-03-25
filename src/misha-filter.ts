@@ -7,24 +7,44 @@ function importAll(r: __WebpackModuleApi.RequireContext) {
 }
 
 const MISHAS = importAll(require.context("./mishaPics/", true, /\.png$/));
+const IMAGES: { [key: string]: HTMLImageElement } = {};
 
 const getRandomMisha = () => {
-  return MISHAS[Math.floor(Math.random() * MISHAS.length)];
+  return "/" + MISHAS[Math.floor(Math.random() * MISHAS.length)];
 };
 
-export default (faceBox: Box) => {
-  const faceDiv = document.createElement("div");
-  faceDiv.style.position = "absolute";
-  faceDiv.style.top = faceBox.y - 15 + "px";
-  faceDiv.style.left = faceBox.x - 15 + "px";
-  faceDiv.style.width = faceBox.width + "px";
-  faceDiv.style.height = faceBox.height + "px";
-  faceDiv.style.overflow = "visible";
-  const img = document.createElement("img");
-  img.src = "/" + getRandomMisha();
-  logger("Chosen image: ", img.src);
-  img.width = faceBox.width + 20;
-  faceDiv.appendChild(img);
+const getCachedImage = (src: string): Promise<HTMLImageElement> => {
+  return new Promise((resolve, reject) => {
+    if (IMAGES[src]) {
+      resolve(IMAGES[src]);
+      return;
+    }
+    const img = new Image();
+    img.onload = () => {
+      IMAGES[src] = img;
+      resolve(img);
+    };
+    img.src = src;
+  });
+};
 
-  return faceDiv;
+const MARGINS = 10;
+
+export default async (
+  target: HTMLCanvasElement,
+  faceBox: Box
+): Promise<HTMLCanvasElement> => {
+  const misha = await getCachedImage(getRandomMisha());
+  logger(`Chosen image: ${misha.src}`);
+
+  const context = target.getContext("2d");
+  context?.drawImage(
+    misha,
+    faceBox.x - MARGINS,
+    faceBox.y - MARGINS,
+    faceBox.width + 2 * MARGINS,
+    faceBox.height + 2 * MARGINS
+  );
+
+  return target;
 };

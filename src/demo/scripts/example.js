@@ -20,7 +20,7 @@ const filterToImg = e => {
     canvas.width,
     canvas.height
   );
-  applyFilter(canvas, undefined).then(result => {
+  applyFilter(canvas, mishaFilter).then(result => {
     console.log("TADAAA!!");
   });
 };
