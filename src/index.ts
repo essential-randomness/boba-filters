@@ -19,8 +19,6 @@ const applyFilter = (
   return new Promise((resolve, _) => {
     findFace(target).then(result => {
       logger("Found the following face boxes:", result);
-      const container = document.querySelector(".imgContainer") as HTMLElement;
-
       result.forEach(faceBox => {
         logger("Applying filter to :", faceBox);
         toApply(target as HTMLCanvasElement, faceBox);
