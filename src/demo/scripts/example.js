@@ -21,10 +21,11 @@ const filterToImg = e => {
 
 const imgSelector = document.querySelector(".imgSelector");
 IMAGES.forEach(imgSource => {
+  const selector = document.createElement("div");
+  selector.classList.add("selector");
   const img = document.createElement("img");
   img.src = `/${imgSource}`;
-  img.width = 100;
-  img.height = 100;
-  imgSelector.append(img);
+  selector.append(img);
+  imgSelector.append(selector);
   img.addEventListener("click", filterToImg);
 });
