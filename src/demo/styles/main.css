@@ -39,6 +39,35 @@ body {
   opacity: 0.5;
 }
 
+.draggingOverlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: gray;
+  opacity: 0.5;
+  color: black;
+  display: none;
+  text-align: center;
+}
+
+.canvasContainer.empty .draggingOverlay,
+.canvasContainer.dragging .draggingOverlay,
+.canvasContainer.enter .draggingOverlay {
+  display: block;
+}
+
+.canvasContainer.dragging {
+  background-color: pink;
+  border: red dotted 3px;
+}
+
+.canvasContainer.enter {
+  background-color: red;
+  border: red solid 3px;
+}
+
 .imgSelector {
   display: flex;
   height: 100px;
