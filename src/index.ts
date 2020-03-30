@@ -11,19 +11,29 @@ type ImageLike =
   | HTMLImageElement
   | HTMLVideoElement;
 
+const copyToNewCanvas = (canvas: HTMLCanvasElement): HTMLCanvasElement => {
+  const copy = document.createElement("canvas");
+  copy.width = canvas.width;
+  copy.height = canvas.height;
+  copy.getContext("2d")?.drawImage(canvas, 0, 0);
+
+  return copy;
+};
+
 const applyFilter = (
   target: ImageLike,
   toApply: (target: HTMLCanvasElement, face: Box) => string
 ) => {
   // TODO: load this into canvas if not canvas
+  const canvas = copyToNewCanvas(target as HTMLCanvasElement);
   return new Promise((resolve, _) => {
-    findFace(target).then(result => {
+    findFace(canvas).then(result => {
       logger("Found the following face boxes:", result);
       result.forEach(faceBox => {
         logger("Applying filter to :", faceBox);
-        toApply(target as HTMLCanvasElement, faceBox);
+        toApply(canvas, faceBox);
       });
-      resolve(result);
+      resolve(canvas);
     });
   });
 };

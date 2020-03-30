@@ -4,8 +4,8 @@ function importAll(r) {
   return r.keys().map(moduleName => r(moduleName).default);
 }
 const IMAGES = importAll(require.context("../images/", true, /\.jpg$/));
-const canvas = document.querySelector("#canvas");
-const context = canvas.getContext("2d");
+let canvas = document.querySelector("#canvas");
+let context = canvas.getContext("2d");
 
 const canvasContainer = document.querySelector(".canvasContainer");
 const filterToImg = img => {
@@ -15,6 +15,10 @@ const filterToImg = img => {
   canvas.height = img.naturalHeight;
   context.drawImage(img, 0, 0);
   applyFilter(canvas, mishaFilter).then(result => {
+    canvasContainer.removeChild(canvas);
+    canvasContainer.append(result);
+    canvas = result;
+    context = result.getContext("2d");
     canvasContainer.classList.remove("loading");
     console.log("TADAAA!!");
   });
@@ -44,7 +48,8 @@ urlSelector.addEventListener("click", () => {
   };
   img.onerror = () => {
     alert(
-      "Failed to load the image. This is most likely due to limitations of the server it's hosted on. Sorry! Hint: try copy/pasting instead."
+      "Failed to load the image. This is most likely due to limitations of the server it's hosted on." +
+        " Sorry! Hint: try copy/pasting the picture instead."
     );
   };
   img.src = url;
