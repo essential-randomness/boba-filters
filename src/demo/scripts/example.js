@@ -29,7 +29,7 @@ IMAGES.forEach(imgSource => {
   const selector = document.createElement("div");
   selector.classList.add("selector");
   const img = document.createElement("img");
-  img.src = `/${imgSource}`;
+  img.src = `${imgSource}`;
   selector.append(img);
   imgSelector.append(selector);
   img.addEventListener("click", e => filterToImg(e.target));

@@ -9,6 +9,7 @@ export const findFace = async (input: faceapi.TNetInput) => {
     "https://gitcdn.xyz/repo/justadudewhohacks/face-api.js/master/weights/"
   );
   const detections = await faceapi.detectAllFaces(input);
+
   logger(detections);
   return detections.map(detection => detection.box);
 };

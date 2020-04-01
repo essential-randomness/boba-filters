@@ -21,7 +21,7 @@ const MISHAS = importAll(require.context("./mishaPics/", true, /\.png$/));
 const IMAGES: { [key: string]: HTMLImageElement } = {};
 
 const getRandomMisha = () => {
-  return "/" + MISHAS[Math.floor(Math.random() * MISHAS.length)];
+  return MISHAS[Math.floor(Math.random() * MISHAS.length)];
 };
 
 const getCachedImage = (src: string): Promise<HTMLImageElement> => {
@@ -44,7 +44,7 @@ export default async (
   faceBox: Box
 ): Promise<HTMLCanvasElement> => {
   const misha = await getCachedImage(getRandomMisha());
-  logger(`Chosen image: ${misha.src}`);
+  //logger(`Chosen image: ${misha.src}`);
 
   // Add some margin so the face is slightly bigger than the target.
   // The margin will depend on the box size. Let's say 1/5.

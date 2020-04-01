@@ -4,7 +4,10 @@ module.exports = {
   entry: { index: "./src/index", demo: "./src/demo/scripts/example" },
   output: {
     path: path.resolve(__dirname, "dist"),
-    filename: "[name].js"
+    filename: "[name].js",
+    library: ["BobaFilters"],
+    //libraryExport: ["index"],
+    libraryTarget: "umd"
   },
   devServer: {
     host: "localhost",
@@ -36,7 +39,10 @@ module.exports = {
         test: /\.(png|jpe?g|gif)$/i,
         use: [
           {
-            loader: "file-loader"
+            loader: "url-loader",
+            options: {
+              limit: true
+            }
           }
         ]
       }
