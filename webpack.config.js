@@ -7,21 +7,21 @@ module.exports = {
     filename: "[name].js",
     library: ["BobaFilters"],
     //libraryExport: ["index"],
-    libraryTarget: "umd"
+    libraryTarget: "umd",
   },
   devServer: {
     host: "localhost",
     port: "3000",
-    inline: true,
     compress: true,
-    open: true,
-    openPage: "src/demo/"
+    static: {
+      directory: path.resolve(__dirname, "src/demo/"),
+    },
   },
   resolve: {
-    extensions: [".ts", ".tsx", ".js", ".json"]
+    extensions: [".ts", ".tsx", ".js", ".json"],
   },
   node: {
-    fs: "empty"
+    fs: "empty",
   },
   module: {
     rules: [
@@ -29,11 +29,11 @@ module.exports = {
         // Include ts, tsx, js, and jsx files.
         test: /\.(ts|js)x?$/,
         exclude: /node_modules/,
-        loader: "babel-loader"
+        loader: "babel-loader",
       },
       {
         test: /\.css$/,
-        use: ["style-loader", "css-loader"]
+        use: ["style-loader", "css-loader"],
       },
       {
         test: /\.(png|jpe?g|gif)$/i,
@@ -41,11 +41,19 @@ module.exports = {
           {
             loader: "url-loader",
             options: {
-              limit: true
-            }
-          }
-        ]
-      }
-    ]
-  }
+              limit: true,
+            },
+          },
+        ],
+      },
+      {
+        test: /shard1$/i,
+        use: [
+          {
+            loader: "file-loader",
+          },
+        ],
+      },
+    ],
+  },
 };
