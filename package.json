@@ -1,6 +1,6 @@
 {
   "name": "boba-filters",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Unconventional image filters. Powered by BobaBoard and April 1st energy.",
   "main": "dist/index.js",
   "scripts": {
